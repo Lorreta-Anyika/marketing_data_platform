@@ -1,0 +1,32 @@
+
+version: 2
+
+models:
+  - name: int_snapchat__ad_details
+    description: >
+      Enriched Snapchat ad details combining ads with their
+      ad groups and campaign information.
+
+    columns:
+      - name: ad_id
+        description: Unique identifier for a Snapchat ad.
+        data_tests:
+          - not_null
+
+      - name: platform
+        description: Advertising platform.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - snapchat
+
+      - name: channel_name
+        description: Marketing channel associated with the ad.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - Paid Social

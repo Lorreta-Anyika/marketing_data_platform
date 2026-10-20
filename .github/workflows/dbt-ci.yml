@@ -1,0 +1,45 @@
+
+name: dbt CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  dbt-ci:
+    runs-on: ubuntu-latest
+
+    env:
+      DBT_TARGET: ci
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DEV_HTTP_PATH: ${{ secrets.DEV_HTTP_PATH }}
+      DBX_ID_APPLICATION_ID: ${{ secrets.DBX_ID_APPLICATION_ID }}
+      DBX_SECRET: ${{ secrets.DBX_SECRET }}
+      CI_CATALOG: ${{ secrets.CI_CATALOG }}
+      CI_SCHEMA: ci
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install project dependencies
+        run: uv sync --locked
+
+      - name: Check dbt configuration
+        working-directory: marketing_data_platform
+        run: uv run dbt debug --target ci
+
+      - name: Build and test dbt project
+        working-directory: marketing_data_platform
+        run: uv run dbt build --target ci

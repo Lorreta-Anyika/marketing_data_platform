@@ -1,0 +1,21 @@
+
+version: 2
+
+models:
+  - name: stg_snapchat__campaigns
+    description: "Staging model for Snapchat advertising campaigns, including campaign identifiers, names, and account associations."
+
+    columns:
+      - name: campaign_id
+        description: "Identifier for a Snapchat advertising campaign."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: account_id
+        description: "Identifier of the advertising account associated with the campaign."
+        data_tests:
+          - not_null
+
+      - name: campaign_name
+        description: "Name of the Snapchat advertising campaign."

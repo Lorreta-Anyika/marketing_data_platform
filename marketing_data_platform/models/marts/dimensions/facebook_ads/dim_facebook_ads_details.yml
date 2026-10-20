@@ -1,0 +1,39 @@
+
+version: 2
+
+models:
+  - name: dim_facebook_ads_details
+    description: >
+      Dimension table containing descriptive details about Facebook ads,
+      their ad groups, campaigns, and advertising accounts.
+
+    columns:
+      - name: ad_id
+        description: Unique identifier for a Facebook ad.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: ad_name
+        description: Name of the Facebook ad.
+
+      - name: ad_status
+        description: Current status of the Facebook ad.
+
+      - name: ad_group_id
+        description: Identifier of the ad group associated with the ad.
+
+      - name: campaign_id
+        description: Identifier of the campaign associated with the ad.
+
+      - name: account_id
+        description: Identifier of the Facebook advertising account.
+
+      - name: ad_currency_code
+        description: Currency code configured for the advertising account.
+
+      - name: platform
+        description: Advertising platform, set to facebook.
+
+      - name: channel_name
+        description: Marketing channel associated with the ad.

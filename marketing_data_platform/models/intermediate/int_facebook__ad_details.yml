@@ -1,0 +1,36 @@
+
+version: 2
+
+models:
+  - name: int_facebook__ad_details
+    description: >
+      Enriched Facebook ad details combining ads with their
+      ad groups, campaigns, and account information.
+
+    columns:
+      - name: ad_id
+        description: Unique identifier for a Facebook ad.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: channel_name
+        description: Marketing channel associated with the ad.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - Paid Social
+
+      - name: platform
+        description: Advertising platform.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - facebook
+
+      - name: ad_currency_code
+        description: Currency associated with the Facebook advertising account.

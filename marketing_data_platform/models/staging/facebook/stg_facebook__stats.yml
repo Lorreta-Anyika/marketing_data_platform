@@ -1,0 +1,39 @@
+
+version: 2
+
+models:
+  - name: stg_facebook__stats
+    description: >
+      Staging model for daily Facebook ad performance metrics,
+      including spend, impressions, clicks, and reporting date.
+
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ad_id
+            - ad_date
+
+    columns:
+      - name: ad_id
+        description: "Unique identifier for the Facebook ad."
+        data_tests:
+          - not_null
+
+      - name: ad_spend
+        description: "Amount spent on the ad for the reporting date."
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+
+      - name: ad_impressions
+        description: "Number of impressions recorded for the ad."
+
+      - name: ad_clicks
+        description: "Number of clicks recorded for the ad."
+
+      - name: ad_date
+        description: "Date the ad performance metrics were recorded."
+        data_tests:
+          - not_null

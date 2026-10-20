@@ -1,0 +1,39 @@
+
+version: 2
+
+sources:
+  - name: snapchat
+    database: marketing_platform
+    schema: raw
+    description: "Raw Snapchat advertising data."
+
+    config:
+      enabled: true
+      meta:
+        owner: "marketing_data_platform"
+      freshness:
+        warn_after:
+          count: 5
+          period: day
+
+    tables:
+      - name: snapchat_ads_ad_history_new_ad_names
+        description: "Snapchat ad details, including ad-group association, ad name, and update timestamp."
+        config:
+          enabled: true
+          event_time: ad_detail_updated_at
+
+      - name: snapchat_ads_adgroup_history_new_ad_group_names
+        description: "Snapchat ad-group history, including campaign associations, ad-group names, and update timestamps."
+        config:
+          enabled: true
+          event_time: ad_group_updated_at
+
+      - name: snapchat_ads_campaign_history_new_campaign_names
+        description: "Snapchat campaign details, including campaign names and associated account IDs."
+
+      - name: snapchat_ads_stats
+        description: "Snapchat advertising performance statistics, including spend, impressions, clicks, date, country, currency, and data source."
+        config:
+          enabled: true
+          event_time: ad_date

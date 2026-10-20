@@ -1,0 +1,50 @@
+
+version: 2
+
+models:
+  - name: fct_facebook_ads_stats_daily
+    description: >
+      Daily Facebook advertising performance fact table containing
+      spend, impressions, clicks, and calculated performance metrics.
+      The expected grain is one row per Facebook ad per date.
+
+    columns:
+      - name: platform
+        description: Advertising platform.
+
+      - name: ad_id
+        description: Identifier of the Facebook ad.
+        data_tests:
+          - not_null
+
+      - name: ad_date
+        description: Date of the advertising performance record.
+        data_tests:
+          - not_null
+
+      - name: ad_country
+        description: Country associated with the advertising record.
+
+      - name: ad_currency_code
+        description: Original advertising currency code.
+
+      - name: ad_spend
+        description: Advertising spend in the original currency.
+
+      - name: spend_eur
+        description: Advertising spend converted to euros.
+
+      - name: ad_impressions
+        description: Number of times the ad was displayed.
+
+      - name: ad_clicks
+        description: Number of clicks received by the ad.
+
+      - name: ctr
+        description: Click-through rate, expressed as a percentage.
+
+      - name: cpc_eur
+        description: Cost per click in euros.
+
+      - name: cpm_eur
+        description: Cost per thousand impressions in euros.

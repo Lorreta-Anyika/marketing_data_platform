@@ -1,0 +1,36 @@
+
+version: 2
+
+models:
+  - name: dim_snapchat_ads_details
+    description: >
+      Dimension table containing descriptive details about Snapchat ads,
+      their ad groups, campaigns, and associated advertising accounts.
+
+    columns:
+      - name: ad_id
+        description: Unique identifier for a Snapchat ad.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: ad_name
+        description: Name of the Snapchat ad.
+
+      - name: ad_detail_updated_at
+        description: Timestamp when the ad details were last updated.
+
+      - name: ad_group_id
+        description: Identifier of the associated ad group.
+
+      - name: campaign_id
+        description: Identifier of the associated campaign.
+
+      - name: account_id
+        description: Identifier of the advertising account.
+
+      - name: platform
+        description: Advertising platform, set to snapchat.
+
+      - name: channel_name
+        description: Marketing channel associated with the ad.

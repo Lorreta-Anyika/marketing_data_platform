@@ -1,0 +1,19 @@
+
+version: 2
+
+models:
+  - name: stg_facebook__campaigns
+    description: "Staging model for Facebook advertising campaigns, including campaign identifiers, names, and update timestamps."
+
+    columns:
+      - name: campaign_id
+        description: "Identifier for a Facebook advertising campaign."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: campaign_name
+        description: "Name of the Facebook advertising campaign."
+
+      - name: campaign_updated_at
+        description: "Timestamp when the campaign details were last updated."

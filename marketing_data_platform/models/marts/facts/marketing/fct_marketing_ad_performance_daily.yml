@@ -1,0 +1,59 @@
+
+version: 2
+
+models:
+  - name: fct_marketing_ad_performance_daily
+    description: >
+      Unified daily marketing performance fact table combining Facebook
+      and Snapchat advertising data. Includes original spend, EUR-converted
+      spend, impressions, clicks, and calculated performance metrics.
+      The expected grain is one row per platform, ad, date, and country.
+
+    columns:
+      - name: platform
+        description: Advertising platform.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['facebook', 'snapchat']
+
+      - name: ad_id
+        description: Identifier of the advertising ad.
+        data_tests:
+          - not_null
+
+      - name: ad_date
+        description: Date of the advertising performance record.
+        data_tests:
+          - not_null
+
+      - name: ad_country
+        description: Country associated with the performance record.
+
+      - name: ad_currency_code
+        description: Original advertising currency code.
+
+      - name: ad_spend
+        description: Advertising spend in the original currency.
+
+      - name: spend_eur
+        description: Advertising spend converted to euros.
+
+      - name: ad_impressions
+        description: Number of times the ad was displayed.
+
+      - name: ad_clicks
+        description: Number of clicks received by the ad.
+
+      - name: data_src
+        description: Source metadata associated with the performance record.
+
+      - name: ctr
+        description: Click-through rate, expressed as a percentage.
+
+      - name: cpc_eur
+        description: Cost per click in euros.
+
+      - name: cpm_eur
+        description: Cost per thousand impressions in euros.

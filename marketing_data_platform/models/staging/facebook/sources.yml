@@ -1,0 +1,48 @@
+
+version: 2
+
+sources:
+  - name: facebook
+    database: marketing_platform
+    schema: raw
+    description: "Raw Facebook advertising data."
+
+    config:
+      enabled: true
+      meta:
+        owner: "marketing_data_platform"
+      freshness:
+        warn_after:
+          count: 5
+          period: day
+
+    tables:
+      - name: ads_stats
+        description: "Daily Facebook ad performance statistics, including spend, impressions, clicks, and date."
+        config:
+          enabled: true
+          event_time: ad_date
+
+      - name: new_acccount_de_randomized
+        description: "Facebook advertising account details, including account name, currency, and timestamps."
+        config:
+          enabled: true
+          event_time: account_updated_at
+
+      - name: new_adgroup_de_randomized
+        description: "Facebook advertising ad-group details, including ad-group name and update timestamp."
+        config:
+          enabled: true
+          event_time: ad_group_updated_at
+
+      - name: new_ads_de_randomized
+        description: "Facebook ad details, including campaign, ad-group, account associations, status, and update timestamp."
+        config:
+          enabled: true
+          event_time: ad_updated_at
+
+      - name: new_campaign_de_randomized
+        description: "Facebook campaign details, including campaign name and update timestamp."
+        config:
+          enabled: true
+          event_time: campaign_updated_at

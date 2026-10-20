@@ -1,0 +1,28 @@
+
+version: 2
+
+models:
+  - name: stg_facebook__ads
+    description: "Staging model for Facebook ads, including identifiers linking ads to accounts, campaigns, and ad groups."
+
+    columns:
+      - name: ad_id
+        description: "Unique identifier for a Facebook ad."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: campaign_id
+        description: "Identifier of the campaign associated with the ad."
+        data_tests:
+          - not_null
+
+      - name: ad_group_id
+        description: "Identifier of the ad group associated with the ad."
+        data_tests:
+          - not_null
+
+      - name: account_id
+        description: "Identifier of the advertising account associated with the ad."
+        data_tests:
+          - not_null

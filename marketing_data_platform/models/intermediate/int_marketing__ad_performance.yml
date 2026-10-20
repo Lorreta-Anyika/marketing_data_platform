@@ -1,0 +1,62 @@
+
+version: 2
+
+models:
+  - name: int_marketing__ad_performance
+    description: >
+      Unified daily advertising performance data from Facebook
+      and Snapchat, standardized into a common structure.
+      The grain is one row per platform, ad, date, country,
+      and currency, subject to the source data's uniqueness.
+
+    columns:
+      - name: platform
+        description: Advertising platform associated with the record.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - facebook
+                  - snapchat
+
+      - name: ad_id
+        description: Identifier of the ad reported by the platform.
+        data_tests:
+          - not_null
+
+      - name: ad_date
+        description: Date on which advertising performance was reported.
+        data_tests:
+          - not_null
+
+      - name: ad_spend
+        description: Advertising spend in the original source currency.
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+
+      - name: ad_impressions
+        description: Number of impressions recorded for the ad.
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+
+      - name: ad_clicks
+        description: Number of clicks recorded for the ad.
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+
+      - name: ad_currency_code
+        description: Currency code associated with the original spend amount.
+
+      - name: ad_country
+        description: Country associated with the advertising performance record.
+
+      - name: data_src
+        description: Source metadata supplied by the advertising platform.

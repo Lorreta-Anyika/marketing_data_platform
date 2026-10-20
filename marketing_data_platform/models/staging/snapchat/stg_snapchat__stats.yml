@@ -1,0 +1,54 @@
+
+version: 2
+
+models:
+  - name: stg_snapchat__stats
+    description: "Staging model for Snapchat advertising performance metrics by ad, date, and country, including spend, impressions, clicks, currency, and data source."
+
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ad_id
+            - ad_date
+            - ad_country
+
+    columns:
+      - name: ad_id
+        description: "Identifier for the Snapchat ad associated with the performance record."
+        data_tests:
+          - not_null
+
+      - name: ad_spend
+        description: "Advertising spend recorded for the ad, date, and country."
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+
+      - name: ad_impressions
+        description: "Number of impressions recorded for the ad, date, and country."
+        data_tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+
+      - name: ad_clicks
+        description: "Number of clicks recorded for the ad, date, and country. Missing source values remain NULL."
+
+      - name: ad_date
+        description: "Date on which the advertising performance was recorded."
+        data_tests:
+          - not_null
+
+      - name: ad_country
+        description: "Country associated with the performance record."
+        data_tests:
+          - not_null
+
+      - name: ad_currency_code
+        description: "Currency used for the recorded advertising spend."
+        data_tests:
+          - not_null
+
+      - name: data_src
+        description: "Source identifier associated with the performance record."

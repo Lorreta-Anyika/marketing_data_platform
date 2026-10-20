@@ -1,0 +1,29 @@
+
+version: 2
+
+models:
+  - name: stg_snapchat__ad_groups
+    description: "Staging model for Snapchat ad groups, including ad-group identifiers, campaign associations, names, and update timestamps."
+
+    columns:
+      - name: surrogate_key
+        description: "Surrogate identifier for an ad-group history record."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: ad_group_id
+        description: "Identifier for the Snapchat ad group. Multiple history records may share this ID."
+        data_tests:
+          - not_null
+
+      - name: campaign_id
+        description: "Identifier of the campaign associated with the ad group."
+        data_tests:
+          - not_null
+
+      - name: ad_group_name
+        description: "Name of the Snapchat ad group."
+
+      - name: ad_group_updated_at
+        description: "Timestamp when the ad-group record was updated."

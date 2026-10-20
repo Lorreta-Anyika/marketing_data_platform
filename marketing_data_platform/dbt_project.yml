@@ -1,0 +1,41 @@
+
+# Name your project
+name: 'marketing_data_platform'
+version: '1.0.0'
+
+# Profile used by dbt
+profile: 'marketing_data_platform'
+
+# Project paths
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Model configurations
+models:
+  marketing_data_platform:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table
+
+  elementary:
+    +schema: elementary
+
+# Seed configurations
+seeds:
+  marketing_data_platform:
+    fx_rates_usd_eur:
+      +column_types:
+        rate_date: date
+        usd_per_eur: double
+
