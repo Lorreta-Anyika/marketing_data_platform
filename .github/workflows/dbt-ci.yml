@@ -1,4 +1,3 @@
-
 name: dbt CI
 
 on:
@@ -35,6 +34,10 @@ jobs:
 
       - name: Install project dependencies
         run: uv sync --locked
+
+      - name: Install dbt packages
+        working-directory: marketing_data_platform
+        run: uv run dbt deps
 
       - name: Check dbt configuration
         working-directory: marketing_data_platform
